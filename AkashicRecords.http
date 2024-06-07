@@ -1,0 +1,6 @@
+@AkashicRecords_HostAddress = http://localhost:5263
+
+GET {{AkashicRecords_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
