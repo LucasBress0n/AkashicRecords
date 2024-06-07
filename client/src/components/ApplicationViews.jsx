@@ -8,6 +8,14 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
     <Routes>
       <Route path="/">
         <Route
+          index
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser}>
+              <p>The Akashic Terminal</p>
+            </AuthorizedRoute>
+          }
+        />
+        <Route
           path="login"
           element={<Login setLoggedInUser={setLoggedInUser} />}
         />
