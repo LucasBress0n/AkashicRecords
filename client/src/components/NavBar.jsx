@@ -27,7 +27,13 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
           <>
             <NavbarToggler onClick={toggleNavbar} />
             <Collapse isOpen={open} navbar>
-              <Nav navbar></Nav>
+              <Nav navbar>
+                <NavItem>
+                  <NavLink tag={RRNavLink} to="/home">
+                    Home
+                  </NavLink>
+                </NavItem>
+              </Nav>
             </Collapse>
             <Button
               color="primary"
