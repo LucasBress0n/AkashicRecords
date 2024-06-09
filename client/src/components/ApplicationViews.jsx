@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { AuthorizedRoute } from "./auth/AuthorizedRoute";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
+import { HomeView } from "./HomeViewFolder/HomeView";
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -15,6 +16,16 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
             </AuthorizedRoute>
           }
         />
+        <Route path="home">
+          <Route
+            index
+            element={
+              <AuthorizedRoute loggedInUser={loggedInUser}>
+                <HomeView />
+              </AuthorizedRoute>
+            }
+          />
+        </Route>
         <Route
           path="login"
           element={<Login setLoggedInUser={setLoggedInUser} />}

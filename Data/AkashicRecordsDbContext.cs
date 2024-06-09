@@ -19,6 +19,9 @@ public class AkashicRecordsDbContext : IdentityDbContext<IdentityUser>
     }
 
     public DbSet<UserProfile> UserProfiles { get; set; }
+    public DbSet<Story> Stories { get; set; }
+    public DbSet<StoriesAuthor> StoriesAuthors { get; set; }
+    public DbSet<StoryChapter> StoryChapters { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
