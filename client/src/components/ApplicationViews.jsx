@@ -3,6 +3,7 @@ import { AuthorizedRoute } from "./auth/AuthorizedRoute";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import { HomeView } from "./HomeViewFolder/HomeView";
+import { StoryDetails } from "./HomeViewFolder/StoryDetailsFolder/StoryDetails";
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -16,12 +17,20 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
             </AuthorizedRoute>
           }
         />
-        <Route path="home">
+        <Route path="story">
           <Route
             index
             element={
               <AuthorizedRoute loggedInUser={loggedInUser}>
                 <HomeView />
+              </AuthorizedRoute>
+            }
+          />
+          <Route
+            path=":StoryId"
+            element={
+              <AuthorizedRoute loggedInUser={loggedInUser}>
+                <StoryDetails />
               </AuthorizedRoute>
             }
           />

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getAllStories } from "../../managers/stories";
+import { Link } from "react-router-dom";
 
 export const HomeView = () => {
   const [allStories, setAllStories] = useState([]);
@@ -14,14 +15,19 @@ export const HomeView = () => {
         {allStories.map((s) => {
           return (
             <article key={s.id}>
-              <div>
-                <section>{s.title}</section>
-                <section>{s.summary}</section>
-              </div>
-              <div>
-                <section>{new Date(s.dateCreated).toDateString()}</section>
-                <section>{new Date(s.lastUpdated).toDateString()}</section>
-              </div>
+              <Link
+                to={`${s.id}`}
+                style={{ textDecoration: "none", color: "#000000" }}
+              >
+                <div>
+                  <section>{s.title}</section>
+                  <section>{s.summary}</section>
+                </div>
+                <div>
+                  <section>{new Date(s.dateCreated).toDateString()}</section>
+                  <section>{new Date(s.lastUpdated).toDateString()}</section>
+                </div>
+              </Link>
             </article>
           );
         })}
