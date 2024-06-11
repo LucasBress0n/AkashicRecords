@@ -33,6 +33,11 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                     Home
                   </NavLink>
                 </NavItem>
+                <NavItem>
+                  <NavLink tag={RRNavLink} to="/create">
+                    Create
+                  </NavLink>
+                </NavItem>
               </Nav>
             </Collapse>
             <Button

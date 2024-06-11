@@ -1,20 +1,14 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace AkashicRecords.Models;
+namespace AkashicRecords.Models.DTOs;
 
-public class Story
+public class StoryWithChaptersDTO
 {
     public int Id { get; set; }
-
-    [Required]
     public string Title { get; set; }
-
-    [Required]
     public string Summary { get; set; }
     public string Image { get; set; }
-
-    [Required]
     public DateTime DateCreated { get; set; }
     public DateTime LastUpdated { get; set; }
-    public List<StoryChapter> StoryChapters { get; set; }
+    public List<StoryChapterDTO> StoryChapters { get; set; }
 }
