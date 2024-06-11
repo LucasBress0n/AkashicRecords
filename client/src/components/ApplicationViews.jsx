@@ -4,6 +4,7 @@ import Login from "./auth/Login";
 import Register from "./auth/Register";
 import { HomeView } from "./HomeViewFolder/HomeView";
 import { StoryDetails } from "./HomeViewFolder/StoryDetailsFolder/StoryDetails";
+import { CreateView } from "./CreateViewFolder/CreateView";
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -35,6 +36,14 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
             }
           />
         </Route>
+        <Route
+          path="create"
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser}>
+              <CreateView loggedInUser={loggedInUser} />
+            </AuthorizedRoute>
+          }
+        />
         <Route
           path="login"
           element={<Login setLoggedInUser={setLoggedInUser} />}

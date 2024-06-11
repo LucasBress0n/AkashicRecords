@@ -15,8 +15,8 @@ export const StoryCover = ({
           <p>{story.summary}</p>
         </div>
         <div>
-          <p>{story.dateCreated}</p>
-          <p>{story.lastUpdated}</p>
+          <p>{new Date(story.dateCreated).toDateString()}</p>
+          <p>{new Date(story.lastUpdated).toDateString()}</p>
         </div>
       </section>
       <div>
@@ -57,7 +57,7 @@ export const PageGenerator = ({
         <div>
           <p>{currentPage.storyContent}</p>
         </div>
-        <p>{currentPage.dateCreated}</p>
+        <p>{new Date(currentPage.dateCreated).toDateString()}</p>
       </section>
       <div>
         <Button
