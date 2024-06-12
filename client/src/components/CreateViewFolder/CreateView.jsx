@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Button, Form } from "reactstrap";
 import { postStory } from "../../managers/stories";
+import { useNavigate } from "react-router-dom";
 
 export const CreateView = ({ loggedInUser }) => {
   const [storyObject, setStoryObject] = useState({});
   const [chapterObject, setChapterObject] = useState([]);
   const [currentChapter, setCurrentChapter] = useState(0);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -44,6 +46,8 @@ export const CreateView = ({ loggedInUser }) => {
         IsAdmin: false,
         IsOwner: true,
         Story: { ...storyObjectCopy },
+      }).then(() => {
+        navigate(`/story`);
       });
     }
   };
