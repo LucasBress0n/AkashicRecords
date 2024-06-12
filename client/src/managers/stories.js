@@ -15,3 +15,11 @@ export const postStory = (StoryAuthorObjectWithStory) => {
     body: JSON.stringify(StoryAuthorObjectWithStory),
   });
 };
+
+export const updateStory = (StoryObjectWithChapters) => {
+  return fetch(_apiUrl, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(StoryObjectWithChapters),
+  });
+};

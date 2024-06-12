@@ -6,6 +6,7 @@ import { HomeView } from "./HomeViewFolder/HomeView";
 import { StoryDetails } from "./HomeViewFolder/StoryDetailsFolder/StoryDetails";
 import { CreateView } from "./CreateViewFolder/CreateView";
 import { MyStories } from "./MyStoriesViewFolder/MyStoriesView";
+import { EditStoryView } from "./EditStoryView/EditStoryView";
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -40,7 +41,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
             path=":StoryId/edit"
             element={
               <AuthorizedRoute loggedInUser={loggedInUser}>
-                Edit
+                <EditStoryView loggedInUser={loggedInUser} />
               </AuthorizedRoute>
             }
           />

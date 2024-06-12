@@ -115,4 +115,81 @@ public class StoriesController : ControllerBase
 
         return Ok();
     }
+
+    [HttpPut]
+    [Authorize]
+    public IActionResult UpdateStory(NewEditStoryDTO EditedStory)
+    {
+        StoryDTO StoryData = new StoryDTO
+        {
+            Id = EditedStory.Id,
+            Title = EditedStory.Title,
+            Summary = EditedStory.Summary,
+            Image = EditedStory.Image,
+            DateCreated = EditedStory.DateCreated,
+            LastUpdated = EditedStory.LastUpdated
+        };
+
+        Story StoryFound = db.Stories.FirstOrDefault(i => i.Id == StoryData.Id);
+
+        if (StoryFound == null)
+        {
+            return NoContent();
+        }
+
+        StoryFound.Title = StoryData.Title;
+        StoryFound.Summary = StoryData.Summary;
+        StoryFound.Image = StoryData.Image;
+        StoryFound.LastUpdated = DateTime.Now;
+
+        db.SaveChanges();
+
+        List<NewEditStoryChapterDTO> StoryChapterData = EditedStory
+            .StoryChapters.Select(sc => new NewEditStoryChapterDTO
+            {
+                Id = sc.Id,
+                StoryId = sc.StoryId,
+                ChapterIndexId = sc.ChapterIndexId,
+                ChapterTitle = sc.ChapterTitle,
+                AuthorNotes = sc.AuthorNotes,
+                StoryContent = sc.StoryContent,
+                IsNew = sc.IsNew
+            })
+            .ToList();
+
+        foreach (NewEditStoryChapterDTO storyChapterEdited in StoryChapterData)
+        {
+            if (storyChapterEdited.IsNew == false)
+            {
+                StoryChapter StoryChapterToEdit = db.StoryChapters.SingleOrDefault(i =>
+                    i.Id == storyChapterEdited.Id
+                );
+
+                StoryChapterToEdit.StoryId = StoryFound.Id;
+                StoryChapterToEdit.ChapterIndexId = storyChapterEdited.ChapterIndexId;
+                StoryChapterToEdit.ChapterTitle = storyChapterEdited.ChapterTitle;
+                StoryChapterToEdit.AuthorNotes = storyChapterEdited.AuthorNotes;
+                StoryChapterToEdit.StoryContent = storyChapterEdited.StoryContent;
+
+                db.SaveChanges();
+            }
+            else if (storyChapterEdited.IsNew == true)
+            {
+                db.StoryChapters.Add(
+                    new StoryChapter
+                    {
+                        StoryId = StoryFound.Id,
+                        ChapterIndexId = storyChapterEdited.ChapterIndexId,
+                        ChapterTitle = storyChapterEdited.ChapterTitle,
+                        AuthorNotes = storyChapterEdited.AuthorNotes,
+                        StoryContent = storyChapterEdited.StoryContent,
+                        DateCreated = DateTime.Now
+                    }
+                );
+                db.SaveChanges();
+            }
+        }
+
+        return Ok();
+    }
 }
