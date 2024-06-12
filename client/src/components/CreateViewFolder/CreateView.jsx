@@ -135,7 +135,7 @@ export const CreateView = ({ loggedInUser }) => {
               <Button
                 onClick={() => {
                   const copy = chapterObject.filter(
-                    (co) => co.Id != currentChapter
+                    (co) => co.ChapterIndexId != currentChapter
                   );
                   copy.map((c) => {
                     if (c.ChapterIndexId > currentChapter) {

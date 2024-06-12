@@ -45,4 +45,20 @@ public class StoriesAuthorController : ControllerBase
                 })
         );
     }
+
+    [HttpGet]
+    [Authorize]
+    public IActionResult GetStoryAuthorByObject(int? UserId, int StoryId)
+    {
+        StoriesAuthor foundAuthor = db
+            .StoriesAuthors.Where(sa => sa.StoryId == StoryId && sa.UserId == UserId)
+            .FirstOrDefault();
+
+        if (foundAuthor != null)
+        {
+            return Ok(foundAuthor);
+        }
+
+        return NotFound();
+    }
 }

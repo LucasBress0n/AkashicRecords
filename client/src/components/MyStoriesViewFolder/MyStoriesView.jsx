@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getStoriesIncludingUser } from "../../managers/atoriesAuthor";
+import { getStoriesIncludingUser } from "../../managers/storiesAuthor";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "reactstrap";
 
