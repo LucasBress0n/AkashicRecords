@@ -5,6 +5,7 @@ import Register from "./auth/Register";
 import { HomeView } from "./HomeViewFolder/HomeView";
 import { StoryDetails } from "./HomeViewFolder/StoryDetailsFolder/StoryDetails";
 import { CreateView } from "./CreateViewFolder/CreateView";
+import { MyStories } from "./MyStoriesViewFolder/MyStoriesView";
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -35,12 +36,28 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
               </AuthorizedRoute>
             }
           />
+          <Route
+            path=":StoryId/edit"
+            element={
+              <AuthorizedRoute loggedInUser={loggedInUser}>
+                Edit
+              </AuthorizedRoute>
+            }
+          />
         </Route>
         <Route
           path="create"
           element={
             <AuthorizedRoute loggedInUser={loggedInUser}>
               <CreateView loggedInUser={loggedInUser} />
+            </AuthorizedRoute>
+          }
+        />
+        <Route
+          path="MyStories"
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser}>
+              <MyStories loggedInUser={loggedInUser} />
             </AuthorizedRoute>
           }
         />

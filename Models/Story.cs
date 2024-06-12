@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using AkashicRecords.Models.DTOs;
 
 namespace AkashicRecords.Models;
 
