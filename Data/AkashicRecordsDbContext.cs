@@ -23,6 +23,8 @@ public class AkashicRecordsDbContext : IdentityDbContext<IdentityUser>
     public DbSet<StoriesAuthor> StoriesAuthors { get; set; }
     public DbSet<StoryChapter> StoryChapters { get; set; }
     public DbSet<StoryLanguage> StoryLanguages { get; set; }
+    public DbSet<StoryType> StoryTypes { get; set; }
+    public DbSet<BackgroundSound> BackgroundSounds { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
