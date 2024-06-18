@@ -1,0 +1,13 @@
+.ManagePermissionsView-Main {
+  height: 100%;
+  width: 100%;
+}
+
+.ManagePermissions-Div-Container {
+  margin: auto;
+}
+
+.ManagePermissions-ListGroup-DuoContainer {
+  text-align: center;
+  border: 1px black solid;
+}

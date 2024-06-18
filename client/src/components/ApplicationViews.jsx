@@ -7,6 +7,8 @@ import { StoryDetails } from "./HomeViewFolder/StoryDetailsFolder/StoryDetails";
 import { CreateView } from "./CreateViewFolder/CreateView";
 import { MyStories } from "./MyStoriesViewFolder/MyStoriesView";
 import { EditStoryView } from "./EditStoryView/EditStoryView";
+import { ManagePermissionsView } from "./ManagePermissionsViewFolder/ManagePermissionsView";
+import { ProfileView } from "./ProfileViewFolder/ProfileView";
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -46,6 +48,22 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
             }
           />
         </Route>
+        <Route
+          path="ManagePerms/:StoryId"
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser}>
+              <ManagePermissionsView loggedInUser={loggedInUser} />
+            </AuthorizedRoute>
+          }
+        />
+        <Route
+          path="Profiles/:UserId"
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser}>
+              <ProfileView loggedInUser={loggedInUser} />
+            </AuthorizedRoute>
+          }
+        />
         <Route
           path="create"
           element={

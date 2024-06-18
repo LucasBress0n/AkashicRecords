@@ -213,7 +213,8 @@ public class AkashicRecordsDbContext : IdentityDbContext<IdentityUser>
                         StoryId = 1,
                         IsAdmin = false,
                         IsOwner = true,
-                        DateAdded = DateTime.Now
+                        IsInvite = false,
+                        DateAdded = DateTime.Now,
                     },
                     new()
                     {
@@ -222,7 +223,8 @@ public class AkashicRecordsDbContext : IdentityDbContext<IdentityUser>
                         StoryId = 2,
                         IsAdmin = false,
                         IsOwner = true,
-                        DateAdded = DateTime.Now
+                        IsInvite = false,
+                        DateAdded = DateTime.Now,
                     }
                 }
             );

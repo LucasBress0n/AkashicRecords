@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Button, Form } from "reactstrap";
+import { Button, Form, FormGroup, Input } from "reactstrap";
 import { postStory } from "../../managers/stories";
 import { useNavigate } from "react-router-dom";
+import "./CreateView.css";
 
 export const CreateView = ({ loggedInUser }) => {
   const [storyObject, setStoryObject] = useState({});
@@ -45,6 +46,7 @@ export const CreateView = ({ loggedInUser }) => {
         StoryId: 0,
         IsAdmin: false,
         IsOwner: true,
+        IsInvite: false,
         Story: { ...storyObjectCopy },
       }).then(() => {
         navigate(`/story`);
@@ -54,7 +56,7 @@ export const CreateView = ({ loggedInUser }) => {
 
   return (
     <main>
-      <Form onSubmit={handleSubmit}>
+      <Form className="mt-5 CreateView-Form" onSubmit={handleSubmit}>
         <Button
           onClick={() => {
             const copy = [...chapterObject];
@@ -80,7 +82,7 @@ export const CreateView = ({ loggedInUser }) => {
         >
           Add Chapter
         </Button>
-        <div>
+        <div className="CreateView-main-div">
           <select
             defaultValue={0}
             onChange={(e) => {
@@ -97,145 +99,129 @@ export const CreateView = ({ loggedInUser }) => {
                 );
               })}
           </select>
-          {currentChapter == 0 ? (
-            <>
-              <input
-                onChange={(e) => {
-                  const copy = { ...storyObject };
-                  copy.Title = e.target.value;
-                  setStoryObject(copy);
-                }}
-                required
-                placeholder="Story Title"
-                value={storyObject.Title ? storyObject.Title : ""}
-              />
-              <input
-                onChange={(e) => {
-                  const copy = { ...storyObject };
-                  copy.Image = e.target.value;
-                  setStoryObject(copy);
-                }}
-                placeholder="Image URL"
-                value={storyObject.Image ? storyObject.Image : ""}
-              />
+          <FormGroup className="d-flex flex-column CreateView-FormGroup-Main">
+            {currentChapter == 0 ? (
+              <>
+                <FormGroup className="CreateView-FormGroup-SubContainer">
+                  <Input
+                    className="mt-3 p-3 CreateView-Title-Input"
+                    style={{}}
+                    onChange={(e) => {
+                      const copy = { ...storyObject };
+                      copy.Title = e.target.value;
+                      setStoryObject(copy);
+                    }}
+                    required
+                    placeholder="Story Title"
+                    value={storyObject.Title ? storyObject.Title : ""}
+                  />
+                  <Input
+                    className="p-2 CreateView-Image-Input"
+                    onChange={(e) => {
+                      const copy = { ...storyObject };
+                      copy.Image = e.target.value;
+                      setStoryObject(copy);
+                    }}
+                    placeholder="Image URL"
+                    value={storyObject.Image ? storyObject.Image : ""}
+                  />
+                </FormGroup>
 
-              <textarea
-                required
-                onChange={(e) => {
-                  const copy = { ...storyObject };
-                  copy.Summary = e.target.value;
-                  setStoryObject(copy);
-                }}
-                placeholder="Story Summary"
-                value={storyObject.Summary ? storyObject.Summary : ""}
-              />
-            </>
-          ) : (
-            <>
-              <Button
-                onClick={() => {
-                  const copy = chapterObject.filter(
-                    (co) => co.ChapterIndexId != currentChapter
-                  );
-                  copy.map((c) => {
-                    if (c.ChapterIndexId > currentChapter) {
-                      c.ChapterIndexId = c.ChapterIndexId - 1;
-                    }
-                  });
-                  setChapterObject(copy);
-                  setCurrentChapter(0);
-                }}
-              >
-                Delete
-              </Button>
-
-              {/* <select
-                defaultValue={0}
-                onChange={(e) => {
-                  const copy = [...chapterObject];
-                  copy.find((c) => c.ChapterIndexId == currentChapter)
-                    .ChapterIndexId = e.target.value;
-                  copy.find((c) => c.ChapterIndexId == e.target.value)
-                    .ChapterIndexId == currentChapter;
-                  setChapterObject(copy);
-                  setCurrentChapter(0);
-                }}
-              >
-                <option value={0}>Swap Order</option>
-                {chapterObject.length > 0 &&
-                  chapterObject.map((co) => {
-                    if (co.ChapterIndexId != currentChapter) {
-                      return (
-                        <option key={co.Id} value={co.ChapterIndexId}>
-                          Page: {co.ChapterIndexId}
-                        </option>
-                      );
-                    }
-                  })}
-              </select> */}
-
-              <input
-                value={
-                  chapterObject.find(
-                    (co) => co.ChapterIndexId == currentChapter
-                  ).ChapterTitle
-                    ? chapterObject.find(
-                        (co) => co.ChapterIndexId == currentChapter
-                      ).ChapterTitle
-                    : ""
-                }
-                required
-                placeholder="Chapter Title"
-                onChange={(e) => {
-                  const copy = [...chapterObject];
-                  copy.find(
-                    (co) => co.ChapterIndexId == currentChapter
-                  ).ChapterTitle = e.target.value;
-                  setChapterObject(copy);
-                }}
-              />
-              <input
-                placeholder="Author Notes"
-                value={
-                  chapterObject.find(
-                    (co) => co.ChapterIndexId == currentChapter
-                  ).AuthorNotes
-                    ? chapterObject.find(
-                        (co) => co.ChapterIndexId == currentChapter
-                      ).AuthorNotes
-                    : ""
-                }
-                onChange={(e) => {
-                  const copy = [...chapterObject];
-                  copy.find(
-                    (co) => co.ChapterIndexId == currentChapter
-                  ).AuthorNotes = e.target.value;
-                  setChapterObject(copy);
-                }}
-              />
-
-              <textarea
-                required
-                placeholder="Story Content"
-                value={
-                  chapterObject.find(
-                    (co) => co.ChapterIndexId == currentChapter
-                  ).StoryContent
-                    ? chapterObject.find(
-                        (co) => co.ChapterIndexId == currentChapter
-                      ).StoryContent
-                    : ""
-                }
-                onChange={(e) => {
-                  const copy = [...chapterObject];
-                  copy.find(
-                    (co) => co.ChapterIndexId == currentChapter
-                  ).StoryContent = e.target.value;
-                  setChapterObject(copy);
-                }}
-              />
-            </>
-          )}
+                <Input
+                  id="exampleText"
+                  name="text"
+                  type="textarea"
+                  className="mt-2 CreateView-TextArea-Input"
+                  required
+                  onChange={(e) => {
+                    const copy = { ...storyObject };
+                    copy.Summary = e.target.value;
+                    setStoryObject(copy);
+                  }}
+                  placeholder="Story Summary"
+                  value={storyObject.Summary ? storyObject.Summary : ""}
+                />
+              </>
+            ) : (
+              <>
+                <Button
+                  onClick={() => {
+                    const copy = chapterObject.filter(
+                      (co) => co.ChapterIndexId != currentChapter
+                    );
+                    copy.map((c) => {
+                      if (c.ChapterIndexId > currentChapter) {
+                        c.ChapterIndexId = c.ChapterIndexId - 1;
+                      }
+                    });
+                    setChapterObject(copy);
+                    setCurrentChapter(0);
+                  }}
+                >
+                  Delete
+                </Button>
+                <input
+                  value={
+                    chapterObject.find(
+                      (co) => co.ChapterIndexId == currentChapter
+                    ).ChapterTitle
+                      ? chapterObject.find(
+                          (co) => co.ChapterIndexId == currentChapter
+                        ).ChapterTitle
+                      : ""
+                  }
+                  required
+                  placeholder="Chapter Title"
+                  onChange={(e) => {
+                    const copy = [...chapterObject];
+                    copy.find(
+                      (co) => co.ChapterIndexId == currentChapter
+                    ).ChapterTitle = e.target.value;
+                    setChapterObject(copy);
+                  }}
+                />
+                <input
+                  placeholder="Author Notes"
+                  value={
+                    chapterObject.find(
+                      (co) => co.ChapterIndexId == currentChapter
+                    ).AuthorNotes
+                      ? chapterObject.find(
+                          (co) => co.ChapterIndexId == currentChapter
+                        ).AuthorNotes
+                      : ""
+                  }
+                  onChange={(e) => {
+                    const copy = [...chapterObject];
+                    copy.find(
+                      (co) => co.ChapterIndexId == currentChapter
+                    ).AuthorNotes = e.target.value;
+                    setChapterObject(copy);
+                  }}
+                />
+                <textarea
+                  required
+                  placeholder="Story Content"
+                  value={
+                    chapterObject.find(
+                      (co) => co.ChapterIndexId == currentChapter
+                    ).StoryContent
+                      ? chapterObject.find(
+                          (co) => co.ChapterIndexId == currentChapter
+                        ).StoryContent
+                      : ""
+                  }
+                  onChange={(e) => {
+                    const copy = [...chapterObject];
+                    copy.find(
+                      (co) => co.ChapterIndexId == currentChapter
+                    ).StoryContent = e.target.value;
+                    setChapterObject(copy);
+                  }}
+                />
+              </>
+            )}
+          </FormGroup>
           <Button type="submit">Save</Button>
         </div>
       </Form>

@@ -22,4 +22,5 @@ public class UserProfile
 
     public IdentityUser IdentityUser { get; set; }
     public DateTime DateCreated { get; set; }
+    public List<StoriesAuthor> StoriesAuthors { get; set; }
 }
