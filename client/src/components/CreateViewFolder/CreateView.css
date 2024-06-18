@@ -1,0 +1,28 @@
+.CreateView-Form {
+  margin: 0px 5% 0px 5%;
+}
+
+.CreateView-main-div {
+  border: 1px solid black;
+}
+
+.CreateView-Title-Input {
+  width: 50%;
+}
+
+.CreateView-Image-Input {
+  width: 50%;
+}
+
+.CreateView-FormGroup-Main {
+  margin: auto;
+}
+
+.CreateView-FormGroup-SubContainer {
+  margin: 2% 3% 1% 3%;
+}
+
+.CreateView-TextArea-Input {
+  margin-right: 100rem;
+  color: gray;
+}

@@ -19,7 +19,7 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
 
   return (
     <div>
-      <Navbar color="light" light fixed="true" expand="lg">
+      <Navbar color="secondary" light fixed="true" expand="lg">
         <NavbarBrand className="mr-auto" tag={RRNavLink} to="/">
           Website Name
         </NavbarBrand>
@@ -41,6 +41,11 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                 <NavItem>
                   <NavLink tag={RRNavLink} to="/MyStories">
                     My Stories
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink tag={RRNavLink} to={`/Profiles/${loggedInUser.id}`}>
+                    My Profile
                   </NavLink>
                 </NavItem>
               </Nav>
