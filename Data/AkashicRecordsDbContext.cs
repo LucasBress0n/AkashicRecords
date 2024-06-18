@@ -22,6 +22,7 @@ public class AkashicRecordsDbContext : IdentityDbContext<IdentityUser>
     public DbSet<Story> Stories { get; set; }
     public DbSet<StoriesAuthor> StoriesAuthors { get; set; }
     public DbSet<StoryChapter> StoryChapters { get; set; }
+    public DbSet<StoryLanguage> StoryLanguages { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -77,7 +78,7 @@ public class AkashicRecordsDbContext : IdentityDbContext<IdentityUser>
                     {
                         Id = "c806cfae-bda9-47c5-8473-dd52fd056a9b",
                         UserName = "AliceJohnson",
-                        Email = "gi",
+                        Email = "alice@johnson.comx",
                         PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(
                             null,
                             _configuration["AdminPassword"]
@@ -196,6 +197,7 @@ public class AkashicRecordsDbContext : IdentityDbContext<IdentityUser>
                         Id = 2,
                         Title = "Advanced Entity Framework Core",
                         Summary = "In-depth exploration of Entity Framework Core features.",
+                        StoryLanguageId = 1,
                         DateCreated = new DateTime(2024, 5, 10),
                         LastUpdated = new DateTime(2024, 8, 5)
                     },
@@ -294,6 +296,34 @@ public class AkashicRecordsDbContext : IdentityDbContext<IdentityUser>
                         I guide the souls departed till the tide arrives.. leading you back home.",
                         DateCreated = new DateTime(2024, 5, 15)
                     }
+                }
+            );
+
+        modelBuilder
+            .Entity<StoryLanguage>()
+            .HasData(
+                new StoryLanguage[]
+                {
+                    new() { Id = 1, StoriesLanguage = "English" },
+                    new() { Id = 2, StoriesLanguage = "Français" },
+                    new() { Id = 3, StoriesLanguage = "Español" },
+                    new() { Id = 4, StoriesLanguage = "Deutsch" },
+                    new() { Id = 5, StoriesLanguage = "日本語" }, // Japanese
+                    new() { Id = 6, StoriesLanguage = "中文" }, // Chinese
+                    new() { Id = 7, StoriesLanguage = "Русский" }, // Russian
+                    new() { Id = 8, StoriesLanguage = "Português" }, // Portuguese
+                    new() { Id = 9, StoriesLanguage = "عربى" }, // Arabic
+                    new() { Id = 10, StoriesLanguage = "हिंदी" }, // Hindi
+                    new() { Id = 11, StoriesLanguage = "한국어" }, // Korean
+                    new() { Id = 12, StoriesLanguage = "Italiano" }, // Italian
+                    new() { Id = 13, StoriesLanguage = "Türkçe" }, // Turkish
+                    new() { Id = 14, StoriesLanguage = "Nederlands" }, // Dutch
+                    new() { Id = 15, StoriesLanguage = "Ελληνικά" }, // Greek
+                    new() { Id = 16, StoriesLanguage = "Magyar" }, // Hungarian
+                    new() { Id = 17, StoriesLanguage = "Polski" }, // Polish
+                    new() { Id = 18, StoriesLanguage = "Svenska" }, // Swedish
+                    new() { Id = 19, StoriesLanguage = "Dansk" }, // Danish
+                    new() { Id = 20, StoriesLanguage = "ไทย" }, // Thai
                 }
             );
     }
