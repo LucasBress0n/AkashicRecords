@@ -9,6 +9,7 @@ import { MyStories } from "./MyStoriesViewFolder/MyStoriesView";
 import { EditStoryView } from "./EditStoryView/EditStoryView";
 import { ManagePermissionsView } from "./ManagePermissionsViewFolder/ManagePermissionsView";
 import { ProfileView } from "./ProfileViewFolder/ProfileView";
+import { ExperimentalView } from "./ExperimentalViewFolder/ExperimentalView";
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -89,6 +90,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           element={<Register setLoggedInUser={setLoggedInUser} />}
         />
       </Route>
+      <Route path="Experimental" element={<ExperimentalView />} />
       <Route path="*" element={<p>Whoops, nothing here...</p>} />
     </Routes>
   );

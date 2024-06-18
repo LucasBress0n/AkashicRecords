@@ -18,9 +18,13 @@ public class Story
     [ForeignKey("StoryLanguage")]
     public int? StoryLanguageId { get; set; }
 
+    [ForeignKey("StoryType")]
+    public int? StoryTypeId { get; set; }
+
     [Required]
     public DateTime DateCreated { get; set; }
     public DateTime LastUpdated { get; set; }
     public List<StoryChapter> StoryChapters { get; set; }
     public StoryLanguage StoryLanguage { get; set; }
+    public StoryType StoryType { get; set; }
 }
